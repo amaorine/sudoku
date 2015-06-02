@@ -19,6 +19,9 @@ int WINAPI WinMain(HINSTANCE hInstance,HINSTANCE hPrevInstance,LPSTR lpCmdLine,i
 	while(ProcessLoop()==0&&CheckStateKey(KEY_INPUT_ESCAPE)==0){//メインループ
 		//ここに処理
 
+		//タイトル画面作成
+		titleMain();
+
 
 
 		//ここに処理
