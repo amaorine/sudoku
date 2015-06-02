@@ -1,7 +1,7 @@
-﻿2015/06/02 21:27:17 にビルドを開始しました。
+﻿2015/06/02 21:49:01 にビルドを開始しました。
      1>ノード 2 上のプロジェクト "C:\Users\c0112548d8\Documents\GitHub\sudoku\pcSudoku\pcSudoku.vcxproj" (build ターゲット)。
      1>InitializeBuildStatus:
-         "Debug\pcSudoku.unsuccessfulbuild" のタッチ タスクを実行しています。
+         "AlwaysCreate" が指定されたため "Debug\pcSudoku.unsuccessfulbuild" を作成しています。
        ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /IC:\Users\c0112548d8\Documents\GitHub\sudoku\include /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _MBCS /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt title.cpp
          title.cpp
@@ -27,4 +27,4 @@
 
 ビルドに成功しました。
 
-経過時間 00:00:01.57
+経過時間 00:00:01.16
