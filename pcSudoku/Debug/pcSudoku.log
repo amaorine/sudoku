@@ -1,15 +1,12 @@
-﻿2015/06/05 0:04:28 にビルドを開始しました。
+﻿2015/06/05 0:40:15 にビルドを開始しました。
      1>ノード 2 上のプロジェクト "C:\Users\c0112548d8\Documents\GitHub\sudoku\pcSudoku\pcSudoku.vcxproj" (build ターゲット)。
      1>InitializeBuildStatus:
          "AlwaysCreate" が指定されたため "Debug\pcSudoku.unsuccessfulbuild" を作成しています。
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /IC:\Users\c0112548d8\Documents\GitHub\sudoku\include /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _MBCS /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt help.cpp title.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /IC:\Users\c0112548d8\Documents\GitHub\sudoku\include /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _MBCS /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt title.cpp
          title.cpp
      1>c:\users\c0112548d8\documents\github\sudoku\pcsudoku\title.cpp(1): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
      1>c:\users\c0112548d8\documents\github\sudoku\pcsudoku\title.cpp(2): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
-         help.cpp
-     1>c:\users\c0112548d8\documents\github\sudoku\pcsudoku\help.cpp(1): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
-         コードを生成中...
        ManifestResourceCompile:
          すべての出力が最新のものです。
        Link:
@@ -31,4 +28,4 @@
 
 ビルドに成功しました。
 
-経過時間 00:00:01.93
+経過時間 00:00:01.43
