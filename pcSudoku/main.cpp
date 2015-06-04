@@ -15,12 +15,25 @@ int WINAPI WinMain(HINSTANCE hInstance,HINSTANCE hPrevInstance,LPSTR lpCmdLine,i
 	if(DxLib_Init() == -1 || SetDrawScreen( DX_SCREEN_BACK )!=0) return -1;//初期化と裏画面化
 
 	//初期化処理
+	int page=0;//このページ切り替えで処理をする。
 
 	while(ProcessLoop()==0&&CheckStateKey(KEY_INPUT_ESCAPE)==0){//メインループ
 		//ここに処理
 
 		//タイトル画面作成
-		titleMain();
+		switch(page){
+		case 0:
+			page=titleMain();
+		case 1:
+			break;
+		case 2:
+			page=helpMain();
+			break;
+
+		default:
+			DxLib_End();
+			break;
+		}
 
 
 
