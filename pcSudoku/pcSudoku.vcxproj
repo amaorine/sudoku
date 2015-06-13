@@ -80,12 +80,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="gameMain.cpp" />
     <ClCompile Include="help.cpp" />
     <ClCompile Include="key.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="title.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="gameMain.h" />
     <ClInclude Include="help.h" />
     <ClInclude Include="include.h" />
     <ClInclude Include="key.h" />

@@ -1,5 +1,6 @@
 #include "../include/DxLib.h";
 #include "key.h";
+#include "gameMain.h";
 
 //タイトル画面
 //メニューをだして、0：ゲームスタート	1:記録を見る	2:終了
@@ -11,17 +12,26 @@ typedef struct{
         char name[128]; // 項目名格納用変数
 }titleMenu_t ;
 
-// メニュー項目要素を5つ作る
-        titleMenu_t MenuElement[4]={
-                {  80, 250, "ゲームスタート" }, // タグの中身の順番で格納される。xに80が、yに100が、nameに"ゲームスタート"が
-                { 100, 300, "レコード" },
-                { 100, 350, "ヘルプ" },
-                { 100, 400, "ゲーム終了" },
-        };
-		titleMenu_t menuDifficulty[3]={
-                {  80, 250, "Easy" }, // タグの中身の順番で格納される。xに80が、yに100が、nameに"ゲームスタート"が
-                { 100, 300, "Normal" },
-                { 100, 350, "Hard" }
+//メニュー項目を2次元配列化
+titleMenu_t menuElement[3][4]={
+	{
+		//[0][0-3]最初のメニュー画面
+		{  80, 250, "ゲームスタート" },
+        { 100, 300, "レコード" },
+        { 100, 350, "ヘルプ" },
+        { 100, 400, "ゲーム終了" }
+	},
+	{
+		//[1][0-2]難易度選択画面
+		{  80, 250, "Easy" }, 
+        { 100, 300, "Normal" },
+        { 100, 350, "Hard" }
+	},
+	{
+		//[2][0-1]難易度確認画面
+		{  80, 250, "yes" }, 
+        { 100, 300, "no" }
+	}
 		};
 
 //変数
@@ -89,8 +99,22 @@ int titleMain(){
 				}
 				break;
 		case 1:	//難易度選択画面の場合
+			//カーソルの位置で難易度判定→トリマ保持
+			setDifficulty(selectNum);
+			selectPage=2;	//はい/いいえへ
 			break;
 		case 2:	//はい/いいえの場面の場合
+			if(selectNum==0){
+				//ハイの場合は難易度渡してゲーム画面へ
+
+				return 3;
+			}
+			else{
+				//ノーなら戻す
+				//初期火曜
+				setDifficulty(-1);
+				selectPage=1;
+			}
 			break;
 		default:
 			//終了
@@ -98,38 +122,21 @@ int titleMain(){
 			break;
 
 		}
+		selectNum=0;
 	}
 
 	//計算フェーズ
-	switch(selectPage){
-	case 0:	//最初の場面→ゲームスタートを選択するときまで。
-		menuCalc(MenuElement,4);
-		break;
-	case 1:	//難易度選択場面の時。
-		menuCalc(menuDifficulty,3);
-		break;
-	case 2:	//はい/いいえの場面の時、確認した場合は選択した難易度をゲーム本体に渡す。
-		break;
-	default:
-		break;
-	}
+	//menuElement[selectPage]の要素数=selectPage=0,1,2の時4,3,2なので4-selectPageで出せる
+		menuCalc(menuElement[selectPage],4-selectPage);
 
 
 	// 描画フェーズ
 
 	//タイトル表示
 	DrawFormatString( 240, 100, GetColor(255,255,255), "Sudoku for PC" );
+	DrawFormatString( 240, 150, GetColor(255,255,255), "Snm:%d",selectNum );
 	//メニュー表示分岐
-	switch(selectPage){
-	case 0:	//ゲームスタートまでの
-		menuDraw(MenuElement,4);
-		break;
-	case 1:	//難易度選択の時
-		 menuDraw(menuDifficulty,3);
-		break;
-	case 2:
-		break;
-	}
+	menuDraw(menuElement[selectPage],4-selectPage);
 	return 0;
 }
 
