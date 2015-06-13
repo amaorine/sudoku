@@ -22,12 +22,15 @@ int WINAPI WinMain(HINSTANCE hInstance,HINSTANCE hPrevInstance,LPSTR lpCmdLine,i
 
 		//タイトル画面作成
 		switch(page){
-		case 0:
+		case 0:	//タイトル画面
 			page=titleMain();
-		case 1:
+		case 1:	//スコア画面
 			break;
-		case 2:
+		case 2:	//ヘルプ画面
 			page=helpMain();
+			break;
+		case 3:
+			page=gameMain();
 			break;
 
 		default:
