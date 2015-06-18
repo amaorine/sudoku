@@ -25,51 +25,49 @@ int jnLine(int x,int y){
 	//被ってなかったら1
 	//縦方向
 	//x変化なし、yが0～9、自身以外とかぶったら0
-	for(int i=0;i<9;i++){
-		if(i!=y){
-			//自分以外で縦で数字被ったら0
-			if(gameBord[0][x][y].num==gameBord[0][x][i].num){
-				return 0;
+		for(int i=0;i<9;i++){
+			if(y!=i){
+				if(gameBord[0][x][y].num==gameBord[0][x][i].num){
+					return 1;
+				}
 			}
-		}
-	}
-	for(int i=0;i<9;i++){
-		if(i!=x){
-			//自分以外で縦で数字被ったら0
-			if(gameBord[0][x][y].num==gameBord[0][i][y].num){
-				return 0;
-			}
-		}
 	}
 
-	return 1;
+	//縦方向
+	//x変化なし、yが0～9、自身以外とかぶったら0
+		for(int i=0;i<9;i++){
+			if(x!=i){
+				if(gameBord[0][x][y].num==gameBord[0][i][y].num){
+					return 1;
+				}
+			}
+	}
+
+
+	return 0;
 	
 }
 int jnRange(int x,int y){
-	//x/3=0-2,y.3=0-2の3*3マス内での被り探し
-	//範囲設定
 	int xRange=x/3*3;
 	int yRange=y/3*3;
-
-	//判定
 	for(int i=0;i<3;i++){
 		for(int j=0;j<3;j++){
-			if(!(xRange+i==x&&yRange+j==y)){
-				//xyが自身以外の場合でかぶってたら0
-				if(gameBord[0][x][y].num==gameBord[0][xRange+i][yRange+i].num){
-					return 0;
-				}
+			if(!(x==i&&y==j)){
+				if(gameBord[0][x][y].num==gameBord[0][i][j].num){
+					return 1;
+				}				
 			}
 		}
 	}
 
-	return 1;
+	return 0;
 }
 
 
 int judgeNum(int x,int y){
 	//縦・横・同じ3*3マス内で数字が被らなかったら1,被ったら0返す。
-	return jnLine(x,y)&&jnRange(x,y);
+	int jn=jnLine(x,y)||jnRange(x,y);
+	return jn;
 }
 
 
@@ -84,10 +82,9 @@ void setNumberField(int dif){
 		}
 	}
 
-	gameBord[0][0][0].num=1;
 
 	//答えの板を作る。gameBord[0][][]
-	for(int i=0;i<2;i++){
+	for(int i=0;i<9;i++){
 		for(int j=0;j<9;j++){
 			//ランダムに数値を入れる
 			//ここから数独の条件に合ってるか判定
@@ -137,12 +134,12 @@ void drawField(){
 		//とりあえずgameBord[0]のやつ描画してるけどこれは答え用なので描画すべきなのは[1]の方
 	for(int k=0;k<9;k++){
 		for(int j=0;j<9;j++){
-			DrawFormatString(xIni+k*lengthParts+lengthParts/2,yIni+j*lengthParts+lengthParts/2, GetColor(255,255,255),"%d",gameBord[0][k][j].num);
+			DrawFormatString(xIni+k*lengthParts+lengthParts/2,yIni+j*lengthParts+lengthParts/2, GetColor(255,255,255),"%d",jnLine(k,j));
 		}
 	}
-	DrawFormatString( 240, 300, GetColor(255,255,255), "hjm:%d",judgeNum(0,0));
-	DrawFormatString( 240, 320, GetColor(255,255,255), "hjm:%d",jnLine(0,0));
-	DrawFormatString( 240, 330, GetColor(255,255,255), "hjm:%d",jnRange(0,0));
+	DrawFormatString( 200, 300, GetColor(255,255,255), "jn:%d",judgeNum(0,0));
+	DrawFormatString( 200, 350, GetColor(255,255,255), "jnL:%d",jnLine(0,0));
+	DrawFormatString( 200, 400, GetColor(255,255,255), "jnR:%d",jnRange(0,0));
 	
 }
 
