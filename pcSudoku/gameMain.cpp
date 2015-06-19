@@ -1,11 +1,24 @@
 #include "../include/DxLib.h";
 #include "key.h";
 
+//C++のライブラリ
+#include <iostream>
+
+#include <algorithm>
+
+using namespace std;
+
 //ゲーム本体部分
 
 //変数
 int difficulty=-1;	//title.cpp内で選択する難易度-0～2で数字がデカいほど難易度高い -1はエラー用
 int setIni=0;	//初期化行動取るかどうかの判定。
+const int n=9;
+//入れる基準の数字
+int num[n]={1,2,3,4,5,6,7,8,9};
+//
+int bord[2][9][9];
+
 
 //ゲーム本体、とりま位置情報と持っている数値のみ
 typedef struct{
@@ -22,19 +35,6 @@ gameNumParts gameBord[2][9][9];
 //初期化時に使う,セットした数字が合っているかの判定
 int jnLine(int x,int y){
 	int flagLine=0;
-	
-	//num==gameBord[][x][y]になったとき1を返す。
-	//被ってなかったら0
-	//縦↓　x固定、y 0-9
-	for(int i=0;i<y;i++){
-		if(gameBord[0][x][i].num==gameBord[0][x][y].num){
-			flagLine=1;
-			break;
-		}
-	}
-
-
-
 
 	return flagLine;
 	
@@ -46,7 +46,7 @@ int jnRange(int x,int y){
 	for(int i=0;i<3;i++){
 		for(int j=0;j<3;j++){
 			if(!(x==i+xRange&&y==j+yRange)){
-				if(gameBord[0][x][y].num==gameBord[0][i+xRange][j+yRange].num){
+				if(bord[0][x][y]==bord[0][i+xRange][j+yRange]){
 					return 1;
 				}				
 			}
@@ -64,49 +64,61 @@ int judgeNum(int x,int y){
 }
 
 
+void sortHight(){
+
+		for(int i=0;i<9;i++){
+			if(i!=0){
+				if(bord[0][0][0]==bord[0][i][0]){
+					int num=bord[0][i][0];
+					bord[0][i][0]=bord[0][i][1];
+					bord[0][i][1]=n;
+				}
+			}
+		}
+}
+
+
 //初期化組
 void setNumberField(int dif){
-	int jm=1;
-	//トリマ初期化
+	//j=y,k=x
+
+
+
+
+	//とりまnum[]で初期化
 	for(int i=0;i<2;i++){
 		for(int j=0;j<9;j++){
 			for(int k=0;k<9;k++){
-				gameBord[i][j][k].num=0;
-			}
-		}
+				bord[i][j][k]=0;
+
+			}	
+		}	
 	}
 
 
-
-
-	//答えの板を作る。gameBord[0][][]
+	//子為の場面　0　作る
+	for(int j=0;j<9;j++){
+		for(int k=0;k<9;k++){
+			bord[0][j][k]=num[k];
+			}	
+	}	
+	//横でランダム入れ買
 	for(int i=0;i<9;i++){
-		for(int j=0;j<9;j++){
-			//ランダムに数値を入れる
-
-			//ここから数独の条件に合ってるか判定
-			/*
-			while(jm){
-				gameBord[0][i][j].num=GetRand(8)+1;
-				jm=judgeNum(i,j);
-			}
-			//jm=1;
-			*/
-			do{
-				gameBord[0][i][j].num=GetRand(8)+1;
-//				judgeNum(i,j);
-			}while(judgeNum(i,j));
-
-		}
+		std::random_shuffle(bord[0][i],bord[0][i]+n);
 	}
 
+	//被らないように判定処理
+	//縦ラインでかぶった時の処理
+	sortHight();
 
+	//3*3のブロック内でかぶった時の処理
 
-
-	
 
 
 	//実際プレイヤーに解かせる板を作る
+
+
+	
 
 
 }
@@ -148,7 +160,7 @@ void drawField(){
 		//とりあえずgameBord[0]のやつ描画してるけどこれは答え用なので描画すべきなのは[1]の方
 	for(int k=0;k<9;k++){
 		for(int j=0;j<9;j++){
-			DrawFormatString(xIni+k*lengthParts+lengthParts/2,yIni+j*lengthParts+lengthParts/2, GetColor(255,255,255),"%d",gameBord[0][k][j].num);
+			DrawFormatString(xIni+j*lengthParts+lengthParts/2,yIni+k*lengthParts+lengthParts/2, GetColor(255,255,255),"%d",bord[0][k][j]);
 			DrawFormatString( 400, 150, GetColor(255,255,255), "x:%d",k);
 			DrawFormatString( 400, 200, GetColor(255,255,255), "y:%d",j);
 
