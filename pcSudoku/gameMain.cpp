@@ -21,39 +21,32 @@ gameNumParts gameBord[2][9][9];
 
 //初期化時に使う,セットした数字が合っているかの判定
 int jnLine(int x,int y){
-	//num==gameBord[][x][y]になったとき0を返す。
-	//被ってなかったら1
-	//縦方向
-	//x変化なし、yが0～9、自身以外とかぶったら0
-		for(int i=0;i<9;i++){
-			if(y!=i){
-				if(gameBord[0][x][y].num==gameBord[0][x][i].num){
-					return 1;
-				}
-			}
-	}
-
-	//縦方向
-	//x変化なし、yが0～9、自身以外とかぶったら0
-		for(int i=0;i<9;i++){
-			if(x!=i){
-				if(gameBord[0][x][y].num==gameBord[0][i][y].num){
-					return 1;
-				}
-			}
+	int flagLine=0;
+	
+	//num==gameBord[][x][y]になったとき1を返す。
+	//被ってなかったら0
+	//縦↓　x固定、y 0-9
+	for(int i=0;i<y;i++){
+		if(gameBord[0][x][i].num==gameBord[0][x][y].num){
+			flagLine=1;
+			break;
+		}
 	}
 
 
-	return 0;
+
+
+	return flagLine;
 	
 }
 int jnRange(int x,int y){
 	int xRange=x/3*3;
 	int yRange=y/3*3;
+
 	for(int i=0;i<3;i++){
 		for(int j=0;j<3;j++){
-			if(!(x==i&&y==j)){
-				if(gameBord[0][x][y].num==gameBord[0][i][j].num){
+			if(!(x==i+xRange&&y==j+yRange)){
+				if(gameBord[0][x][y].num==gameBord[0][i+xRange][j+yRange].num){
 					return 1;
 				}				
 			}
@@ -65,7 +58,7 @@ int jnRange(int x,int y){
 
 
 int judgeNum(int x,int y){
-	//縦・横・同じ3*3マス内で数字が被らなかったら1,被ったら0返す。
+	//縦・横・同じ3*3マス内で数字が被らなかったら0,被ったら1返す。
 	int jn=jnLine(x,y)||jnRange(x,y);
 	return jn;
 }
@@ -73,6 +66,7 @@ int judgeNum(int x,int y){
 
 //初期化組
 void setNumberField(int dif){
+	int jm=1;
 	//トリマ初期化
 	for(int i=0;i<2;i++){
 		for(int j=0;j<9;j++){
@@ -83,18 +77,38 @@ void setNumberField(int dif){
 	}
 
 
+
+
 	//答えの板を作る。gameBord[0][][]
 	for(int i=0;i<9;i++){
 		for(int j=0;j<9;j++){
 			//ランダムに数値を入れる
+
 			//ここから数独の条件に合ってるか判定
+			/*
+			while(jm){
+				gameBord[0][i][j].num=GetRand(8)+1;
+				jm=judgeNum(i,j);
+			}
+			//jm=1;
+			*/
+			do{
+				gameBord[0][i][j].num=GetRand(8)+1;
+//				judgeNum(i,j);
+			}while(judgeNum(i,j));
 
 		}
 	}
 
 
 
+
+	
+
+
 	//実際プレイヤーに解かせる板を作る
+
+
 }
 
 
@@ -134,9 +148,13 @@ void drawField(){
 		//とりあえずgameBord[0]のやつ描画してるけどこれは答え用なので描画すべきなのは[1]の方
 	for(int k=0;k<9;k++){
 		for(int j=0;j<9;j++){
-			DrawFormatString(xIni+k*lengthParts+lengthParts/2,yIni+j*lengthParts+lengthParts/2, GetColor(255,255,255),"%d",jnLine(k,j));
+			DrawFormatString(xIni+k*lengthParts+lengthParts/2,yIni+j*lengthParts+lengthParts/2, GetColor(255,255,255),"%d",gameBord[0][k][j].num);
+			DrawFormatString( 400, 150, GetColor(255,255,255), "x:%d",k);
+			DrawFormatString( 400, 200, GetColor(255,255,255), "y:%d",j);
+
 		}
 	}
+
 	DrawFormatString( 200, 300, GetColor(255,255,255), "jn:%d",judgeNum(0,0));
 	DrawFormatString( 200, 350, GetColor(255,255,255), "jnL:%d",jnLine(0,0));
 	DrawFormatString( 200, 400, GetColor(255,255,255), "jnR:%d",jnRange(0,0));

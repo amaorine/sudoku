@@ -52,7 +52,6 @@ int selectPage=0;
 			else if(CheckStateKey(KEY_INPUT_UP)==1){
 				selectNum = (selectNum+n-1) %n;
 			}
-			if(CheckStateKey(KEY_INPUT_DOWN)== 1 ||CheckStateKey(KEY_INPUT_UP)== 1 ){ // 下キーか、上キーが押された瞬間
 					for(int i=0; i<n;i++ ){              // メニュー項目数である5個ループ処理
 						if(i==selectNum){          // 今処理しているのが、選択番号と同じ要素なら
 							tM[i].x = 80; // 座標を80にする
@@ -60,7 +59,6 @@ int selectPage=0;
 							tM[i].x = 100;// 座標を100にする
 						}
 					}
-				}
 
 	}
 
@@ -124,6 +122,24 @@ int titleMain(){
 		}
 		selectNum=0;
 	}
+	else if(CheckStateKey(KEY_INPUT_X)==1){
+		//Xボタンで戻るときの操作。このファイル内での切り替え動作なので、見る値はselectPageのみ
+		switch(selectPage){
+		case 0:	//タイトルの最初
+			selectNum=3;	//一番下の終了操作までカーソル持ってく
+			break;
+		case 1:	//難易度選択画面なのでタイトル画面に戻す
+			selectPage=0;
+			break;
+		case 2:	//yes/no画面なので難易度選択画面に戻す
+			selectPage=1;
+			break;
+		default:
+			//終了
+			DxLib_End();//ＤＸライブラリ終了処理
+			break;
+		}
+	}
 
 	//計算フェーズ
 	//menuElement[selectPage]の要素数=selectPage=0,1,2の時4,3,2なので4-selectPageで出せる
@@ -135,6 +151,7 @@ int titleMain(){
 	//タイトル表示
 	DrawFormatString( 240, 100, GetColor(255,255,255), "Sudoku for PC" );
 	DrawFormatString( 240, 150, GetColor(255,255,255), "Snm:%d",selectNum );
+	DrawFormatString( 240, 200, GetColor(255,255,255), "SPa:%d",selectPage );
 	//メニュー表示分岐
 	menuDraw(menuElement[selectPage],4-selectPage);
 	return 0;
