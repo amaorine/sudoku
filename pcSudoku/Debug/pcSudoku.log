@@ -1,4 +1,4 @@
-﻿2015/06/19 19:49:33 にビルドを開始しました。
+﻿2015/06/26 15:43:22 にビルドを開始しました。
      1>ノード 2 上のプロジェクト "C:\Users\c0112548d8\Documents\GitHub\sudoku\pcSudoku\pcSudoku.vcxproj" (build ターゲット)。
      1>InitializeBuildStatus:
          "AlwaysCreate" が指定されたため "Debug\pcSudoku.unsuccessfulbuild" を作成しています。
@@ -7,6 +7,9 @@
          gameMain.cpp
      1>c:\users\c0112548d8\documents\github\sudoku\pcsudoku\gamemain.cpp(1): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
      1>c:\users\c0112548d8\documents\github\sudoku\pcsudoku\gamemain.cpp(2): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
+     1>c:\users\c0112548d8\documents\github\sudoku\pcsudoku\gamemain.cpp(59): warning C4101: 'k' : ローカル変数は 1 度も使われていません。
+     1>c:\users\c0112548d8\documents\github\sudoku\pcsudoku\gamemain.cpp(59): warning C4101: 'l' : ローカル変数は 1 度も使われていません。
+     1>c:\users\c0112548d8\documents\github\sudoku\pcsudoku\gamemain.cpp(59): warning C4101: 'm' : ローカル変数は 1 度も使われていません。
        ManifestResourceCompile:
          すべての出力が最新のものです。
        Link:
@@ -29,4 +32,4 @@
 
 ビルドに成功しました。
 
-経過時間 00:00:01.84
+経過時間 00:00:01.74

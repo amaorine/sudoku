@@ -3,9 +3,8 @@
 
 //C++のライブラリ
 #include <iostream>
-
 #include <algorithm>
-
+#include <time.h>
 using namespace std;
 
 //ゲーム本体部分
@@ -33,12 +32,7 @@ gameNumParts gameBord[2][9][9];
 
 
 //初期化時に使う,セットした数字が合っているかの判定
-int jnLine(int x,int y){
-	int flagLine=0;
 
-	return flagLine;
-	
-}
 int jnRange(int x,int y){
 	int xRange=x/3*3;
 	int yRange=y/3*3;
@@ -57,24 +51,72 @@ int jnRange(int x,int y){
 }
 
 
-int judgeNum(int x,int y){
-	//縦・横・同じ3*3マス内で数字が被らなかったら0,被ったら1返す。
-	int jn=jnLine(x,y)||jnRange(x,y);
-	return jn;
-}
+
 
 
 void sortHight(){
+int n=0;	//取り換えする時の文字
+int k,l,m;	//並び替えに使う
+int count[9];	//被ってないかチェック
 
-		for(int i=0;i<9;i++){
-			if(i!=0){
-				if(bord[0][0][0]==bord[0][i][0]){
-					int num=bord[0][i][0];
-					bord[0][i][0]=bord[0][i][1];
-					bord[0][i][1]=n;
+
+
+//縦で上から見て行って、配列bord[0][i][0]とかぶった配列bord[0][j][任意]を、配列bord[0][j][9-1]の様は指定されたやつの隣と交換。
+
+//1-9が縦列内での数字の個数を数える
+
+for(int i=0;i<9;i++){
+	count[i]=0;
+}
+
+for(int i=0;i<9;i++){
+	count[bord[0][i][0]-1]++;
+}
+
+//checkNum[i]
+for(int i=0;i<9;i++){
+	//count[i]が
+	//0→同列にあるcount[i]==0の数とcount[i]==2の数交換
+	//2→同列にあるcount[i]==0の数とcount[i]==2の数交換
+	//1→何もしない
+	if(count[i]!=1){
+		//個数が1以外の場合は被ってるか足りないかなので交換処理
+		for(int j=0;j<9;j++){
+			//j bord[0][j][0]
+			if(bord[0][j][0]-1==i){
+				//iとbord[0][j][0]の中身一致
+				for(int k=8;k>0;k--){
+					//k bord[0][j][k]
+					if(count[bord[0][j][k]-1]==0){
+						//count[bord[0][j][k]]の値が1とcount[i]以外の場合
+						//=count[i]=0ならば2,count[i]==2ならば0の場合
+						//交換
+						int n=bord[0][j][k];
+						bord[0][j][k]=bord[0][j][0];
+						bord[0][j][0]=n;
+
+						for(int m=0;m<9;m++){
+							count[m]=0;
+						}
+
+						for(int m=0;m<9;m++){
+							count[bord[0][m][0]-1]++;
+						}
+
+
+
+					}
 				}
 			}
 		}
+
+
+	}
+}
+
+
+
+
 }
 
 
@@ -82,7 +124,7 @@ void sortHight(){
 void setNumberField(int dif){
 	//j=y,k=x
 
-
+	srand((unsigned)time(NULL));
 
 
 	//とりまnum[]で初期化
@@ -161,15 +203,8 @@ void drawField(){
 	for(int k=0;k<9;k++){
 		for(int j=0;j<9;j++){
 			DrawFormatString(xIni+j*lengthParts+lengthParts/2,yIni+k*lengthParts+lengthParts/2, GetColor(255,255,255),"%d",bord[0][k][j]);
-			DrawFormatString( 400, 150, GetColor(255,255,255), "x:%d",k);
-			DrawFormatString( 400, 200, GetColor(255,255,255), "y:%d",j);
-
 		}
 	}
-
-	DrawFormatString( 200, 300, GetColor(255,255,255), "jn:%d",judgeNum(0,0));
-	DrawFormatString( 200, 350, GetColor(255,255,255), "jnL:%d",jnLine(0,0));
-	DrawFormatString( 200, 400, GetColor(255,255,255), "jnR:%d",jnRange(0,0));
 	
 }
 
