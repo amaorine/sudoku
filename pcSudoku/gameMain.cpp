@@ -65,7 +65,7 @@ int count[9];	//被ってないかチェック
 
 //1-9が縦列内での数字の個数を数える
 
-	for(int h=0;h<7;h++){
+	for(int h=0;h<9;h++){
 		for(int i=0;i<9;i++){
 			count[i]=0;
 		}
@@ -80,7 +80,7 @@ int count[9];	//被ってないかチェック
 			//0→同列にあるcount[i]==0の数とcount[i]==2の数交換
 			//2→同列にあるcount[i]==0の数とcount[i]==2の数交換
 			//1→何もしない
-			if(count[i]>1){
+			while(count[i]>1){
 				//個数が1以外の場合は被ってるか足りないかなので交換処理
 				for(int j=0;j<9;j++){
 					//j bord[0][j][0]
@@ -88,7 +88,7 @@ int count[9];	//被ってないかチェック
 						//iとbord[0][j][0]の中身一致
 						for(int k=8;k>h;k--){
 							//k bord[0][j][k]
-							if(count[bord[0][j][k]-1]!=1&&count[bord[0][j][k]-1]!=count[i]){
+							if(count[bord[0][j][k]-1]==0){
 								//count[bord[0][j][k]]の値が1とcount[i]以外の場合
 								//=count[i]=0ならば2,count[i]==2ならば0の場合
 								//交換
@@ -120,7 +120,7 @@ int count[9];	//被ってないかチェック
 void setNumberField(int dif){
 	//j=y,k=x
 
-	srand((unsigned)time(NULL));
+//	srand((unsigned)time(NULL));
 
 
 	//とりまnum[]で初期化
