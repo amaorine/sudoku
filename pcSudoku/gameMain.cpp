@@ -65,56 +65,52 @@ int count[9];	//被ってないかチェック
 
 //1-9が縦列内での数字の個数を数える
 
-for(int i=0;i<9;i++){
-	count[i]=0;
-}
+	for(int h=0;h<7;h++){
+		for(int i=0;i<9;i++){
+			count[i]=0;
+		}
 
-for(int i=0;i<9;i++){
-	count[bord[0][i][0]-1]++;
-}
+		for(int i=0;i<9;i++){
+			count[bord[0][i][h]-1]++;
+		}
 
-//checkNum[i]
-for(int i=0;i<9;i++){
-	//count[i]が
-	//0→同列にあるcount[i]==0の数とcount[i]==2の数交換
-	//2→同列にあるcount[i]==0の数とcount[i]==2の数交換
-	//1→何もしない
-	if(count[i]!=1){
-		//個数が1以外の場合は被ってるか足りないかなので交換処理
-		for(int j=0;j<9;j++){
-			//j bord[0][j][0]
-			if(bord[0][j][0]-1==i){
-				//iとbord[0][j][0]の中身一致
-				for(int k=8;k>0;k--){
-					//k bord[0][j][k]
-					if(count[bord[0][j][k]-1]==0){
-						//count[bord[0][j][k]]の値が1とcount[i]以外の場合
-						//=count[i]=0ならば2,count[i]==2ならば0の場合
-						//交換
-						int n=bord[0][j][k];
-						bord[0][j][k]=bord[0][j][0];
-						bord[0][j][0]=n;
+		//checkNum[i]
+		for(int i=0;i<9;i++){
+			//count[i]が
+			//0→同列にあるcount[i]==0の数とcount[i]==2の数交換
+			//2→同列にあるcount[i]==0の数とcount[i]==2の数交換
+			//1→何もしない
+			if(count[i]>1){
+				//個数が1以外の場合は被ってるか足りないかなので交換処理
+				for(int j=0;j<9;j++){
+					//j bord[0][j][0]
+					if(bord[0][j][h]-1==i){
+						//iとbord[0][j][0]の中身一致
+						for(int k=8;k>h;k--){
+							//k bord[0][j][k]
+							if(count[bord[0][j][k]-1]!=1&&count[bord[0][j][k]-1]!=count[i]){
+								//count[bord[0][j][k]]の値が1とcount[i]以外の場合
+								//=count[i]=0ならば2,count[i]==2ならば0の場合
+								//交換
+								int n=bord[0][j][k];
+								bord[0][j][k]=bord[0][j][h];
+								bord[0][j][h]=n;
 
-						for(int m=0;m<9;m++){
-							count[m]=0;
+								for(int m=0;m<9;m++){
+									count[m]=0;
+								}
+
+								for(int m=0;m<9;m++){
+									count[bord[0][m][h]-1]++;
+								}
+							}
 						}
-
-						for(int m=0;m<9;m++){
-							count[bord[0][m][0]-1]++;
-						}
-
-
-
 					}
 				}
 			}
 		}
 
-
 	}
-}
-
-
 
 
 }
