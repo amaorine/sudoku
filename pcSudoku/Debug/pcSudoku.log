@@ -1,15 +1,30 @@
-﻿2015/06/26 19:05:08 にビルドを開始しました。
+﻿2015/06/26 19:46:56 にビルドを開始しました。
      1>ノード 2 上のプロジェクト "C:\Users\c0112548d8\Documents\GitHub\sudoku\pcSudoku\pcSudoku.vcxproj" (build ターゲット)。
      1>InitializeBuildStatus:
          "AlwaysCreate" が指定されたため "Debug\pcSudoku.unsuccessfulbuild" を作成しています。
        ClCompile:
-         すべての出力が最新のものです。
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /IC:\Users\c0112548d8\Documents\GitHub\sudoku\include /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _WINDOWS /D _MBCS /Gm /EHsc /RTC1 /MTd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt gameMain.cpp
+         gameMain.cpp
+     1>c:\users\c0112548d8\documents\github\sudoku\pcsudoku\gamemain.cpp(1): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
+     1>c:\users\c0112548d8\documents\github\sudoku\pcsudoku\gamemain.cpp(2): warning C4067: プリプロセッサ ディレクティブの後に余分な文字がありました - 改行が必要です
+     1>c:\users\c0112548d8\documents\github\sudoku\pcsudoku\gamemain.cpp(59): warning C4101: 'k' : ローカル変数は 1 度も使われていません。
+     1>c:\users\c0112548d8\documents\github\sudoku\pcsudoku\gamemain.cpp(59): warning C4101: 'l' : ローカル変数は 1 度も使われていません。
+     1>c:\users\c0112548d8\documents\github\sudoku\pcsudoku\gamemain.cpp(59): warning C4101: 'm' : ローカル変数は 1 度も使われていません。
        ManifestResourceCompile:
          すべての出力が最新のものです。
        Link:
-         すべての出力が最新のものです。
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\c0112548d8\Documents\GitHub\sudoku\pcSudoku\Debug\pcSudoku.exe" /INCREMENTAL /NOLOGO /LIBPATH:C:\Users\c0112548d8\Documents\GitHub\sudoku\include kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\pcSudoku.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\c0112548d8\Documents\GitHub\sudoku\pcSudoku\Debug\pcSudoku.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\c0112548d8\Documents\GitHub\sudoku\pcSudoku\Debug\pcSudoku.lib" /MACHINE:X86 Debug\pcSudoku.exe.embed.manifest.res
+         Debug\gameMain.obj
+         Debug\help.obj
+         Debug\key.obj
+         Debug\main.obj
+         Debug\title.obj
        Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug\pcSudoku.exe.embed.manifest" /manifest Debug\pcSudoku.exe.intermediate.manifest
          すべての出力が最新のものです。
+       LinkEmbedManifest:
+         すべての出力が最新のものです。
+         pcSudoku.vcxproj -> C:\Users\c0112548d8\Documents\GitHub\sudoku\pcSudoku\Debug\pcSudoku.exe
        FinalizeBuildStatus:
          ファイル "Debug\pcSudoku.unsuccessfulbuild" を削除しています。
          "Debug\pcSudoku.lastbuildstate" のタッチ タスクを実行しています。
@@ -17,4 +32,4 @@
 
 ビルドに成功しました。
 
-経過時間 00:00:00.10
+経過時間 00:00:02.39
